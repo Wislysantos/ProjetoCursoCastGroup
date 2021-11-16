@@ -1,7 +1,10 @@
+import { DatePipe } from '@angular/common';
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit, Pipe } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CadastroCurso } from 'src/app/shared/cadastro-curso';
 import { CadastroCursoService } from 'src/app/shared/cadastro-curso.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -21,8 +24,7 @@ export class CadastroCursoViewComponent implements OnInit {
   }   
   
   dtHoje = new Date();
-  nv = this.cadastro.formData.dtInicio;
-  novoDate = new Date(this.nv);
+  
 
   alterar(selectedRecord: CadastroCurso) {
     this.cadastro.formData = Object.assign({}, selectedRecord);
@@ -32,12 +34,22 @@ export class CadastroCursoViewComponent implements OnInit {
     this.cadastro.getCasCurso(id)
     console.log(this.cadastro.formData.dtInicio);
   }
+  
+  deletar(id: number,dataInicio: string) {
+    let dt = new Date(dataInicio)
+    
 
-  deletar(id: number) {
-    if(this.cadastro.formData.dtInicio ){
 
-    }
-    if (confirm('Tem certeza que deseja deletar este registro?')) {
+
+    console.log(dt.getTime() < this.dtHoje.getTime());
+    console.log(dt.getTime());
+    console.log(this.dtHoje.getTime());
+    
+    
+    
+    if(dt.getTime() < this.dtHoje.getTime()){
+      alert("Este Curso não pode ser apagar")
+    }else{ (confirm('Tem certeza que deseja deletar este registro?')) 
       this.cadastro.deleteCasCurso(id)
         .subscribe(
           res => {
@@ -50,3 +62,5 @@ export class CadastroCursoViewComponent implements OnInit {
   }
 
 }
+
+
