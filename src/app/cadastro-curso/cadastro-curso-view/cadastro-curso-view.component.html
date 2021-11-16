@@ -1,0 +1,42 @@
+
+<div class="row">
+  <div class="col-md-4">
+    <app-cadastro-curso></app-cadastro-curso>
+  </div>
+  <div class="col-md-8">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Nome Curso</th>
+          <th>Qtd Alunos</th>
+          <th>Data Inicio</th>
+          <th>Data Termino</th>
+          <th>Descrição</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of cadastro.list">
+          <td >{{c.nomeCurso}}</td>
+          <td >{{c.qtdAlunos}}</td>
+          <td >{{c.dtInicio.split("T", 1)}}</td>
+          <td >{{c.dtTermino.split("T", 1)}}</td>
+          <td >{{c.descricao}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deletar(c.cursoID)">Apagar</button>           
+          </td>
+          <td>
+            <button class="btn btn-warning" (click)="alterar(c)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+
+</div>
+
