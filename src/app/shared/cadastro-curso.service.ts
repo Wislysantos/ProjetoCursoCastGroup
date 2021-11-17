@@ -9,16 +9,16 @@ import { Router } from '@angular/router';
 })
 export class CadastroCursoService {
 
-  
-  
+
+
   constructor(private http: HttpClient, private router: Router) { }
 
   readonly baseURL = 'https://localhost:5001/api/Cursoes'
   formData: CadastroCurso= new CadastroCurso();
   list!: CadastroCurso[];
 
-  
-  
+
+
   postCasCurso(){
     return this.http.post(this.baseURL, this.formData)
   }

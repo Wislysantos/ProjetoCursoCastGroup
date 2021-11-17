@@ -12,19 +12,19 @@ import * as moment from 'moment';
   templateUrl: './cadastro-curso-view.component.html',
   styleUrls: ['./cadastro-curso-view.component.css']
 })
-export class CadastroCursoViewComponent implements OnInit { 
-      
-  
+export class CadastroCursoViewComponent implements OnInit {
+
+
   constructor(public cadastro: CadastroCursoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.cadastro.refreshList()
     console.log(this.cadastro.formData.dtInicio);
-    
-  }   
-  
+
+  }
+
   dtHoje = new Date();
-  
+
 
   alterar(selectedRecord: CadastroCurso) {
     this.cadastro.formData = Object.assign({}, selectedRecord);
@@ -34,22 +34,17 @@ export class CadastroCursoViewComponent implements OnInit {
     this.cadastro.getCasCurso(id)
     console.log(this.cadastro.formData.dtInicio);
   }
-  
+
   deletar(id: number,dataInicio: string) {
     let dt = new Date(dataInicio)
-    
 
-
-
-    console.log(dt.getTime() < this.dtHoje.getTime());
+    console.log(dt < this.dtHoje);
     console.log(dt.getTime());
     console.log(this.dtHoje.getTime());
-    
-    
-    
-    if(dt.getTime() < this.dtHoje.getTime()){
+
+    if(dt < this.dtHoje){
       alert("Este Curso não pode ser apagar")
-    }else{ (confirm('Tem certeza que deseja deletar este registro?')) 
+    }else{ (confirm('Tem certeza que deseja deletar este registro?'))
       this.cadastro.deleteCasCurso(id)
         .subscribe(
           res => {
