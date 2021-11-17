@@ -6,5 +6,6 @@ export class CadastroCurso {
     dtInicio: string  = '';
     dtTermino: string = '';
     descricao: string = '';
+    categoria: string = '';
 
 }

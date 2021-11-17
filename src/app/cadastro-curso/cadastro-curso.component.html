@@ -26,12 +26,21 @@
         </div>
       </div>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <label class="form-label">Descrição</label>
             <input type="text" class="form-control" id="dtTermino" name="descricao" #descricao='ngModel' [(ngModel)]="cadastro.formData.descricao"
             [class.invalid]=" descricao.invalid && descricao.valid" required>
           </div>
+          <div class="col-md-6">
+            <label class="form-label">Categoria</label>
+            <select  class="form-select"  name="categorias" [(ngModel)]="cadastro.formData.categoria" >
+              <option *ngFor="let cff of cadastro.listaCategoria" [ngValue]="cff.descricao">
+                {{cff.descricao}}
+              </option>
+            </select>
+          </div>
         </div>
+
         <br>
         <div class="row">
           <div class="col-12">

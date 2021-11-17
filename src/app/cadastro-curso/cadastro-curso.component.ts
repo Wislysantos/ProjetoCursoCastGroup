@@ -3,8 +3,6 @@ import { CadastroCursoService } from './../shared/cadastro-curso.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CadastroCurso } from '../shared/cadastro-curso';
-import { variable } from '@angular/compiler/src/output/output_ast';
-import { invalid } from '@angular/compiler/src/render3/view/util';
 
 
 
@@ -15,14 +13,14 @@ import { invalid } from '@angular/compiler/src/render3/view/util';
 })
 export class CadastroCursoComponent implements OnInit {
 
+  dtHoje = new Date();
+  listaCategoria = new Array()
 
   constructor(public cadastro: CadastroCursoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.buscarCategorias()
   }
-
-  dtHoje = new Date();
-
 
   onSubmit(form: NgForm) {
 
@@ -30,7 +28,7 @@ export class CadastroCursoComponent implements OnInit {
     console.log(this.cadastro.formData);
     console.log(this.cadastro.formData.dtInicio > this.cadastro.formData.dtTermino);
 
-    if(this.cadastro.formData.dtInicio > this.cadastro.formData.dtTermino){
+    /*if(this.cadastro.formData.dtInicio > this.cadastro.formData.dtTermino){
       return alert("Data de inicio não pode ser maior do que Termino")
     }
     if(this.cadastro.formData.nomeCurso == "" || this.cadastro.formData.qtdAlunos == null || this.cadastro.formData.qtdAlunos == 0 || this.cadastro.formData.descricao == "" || this.cadastro.formData.dtInicio == "" || this.cadastro.formData.dtTermino == ""){
@@ -45,7 +43,7 @@ export class CadastroCursoComponent implements OnInit {
       else
         this.updateRecord(form);
 
-    /*this.cadastro.formData.dtInicio
+    this.cadastro.formData.dtInicio
     if (this.cadastro.formData.cursoID == 0)
       this.insertRecord(form);
     else
@@ -81,6 +79,11 @@ export class CadastroCursoComponent implements OnInit {
 
   ver(n: any){
     console.log(n);
+  }
+
+  buscarCategorias() {
+    this.cadastro.getCategoria()
+    console.log(this.cadastro.listaCategoria);
   }
 
 }

@@ -14,8 +14,10 @@ export class CadastroCursoService {
   constructor(private http: HttpClient, private router: Router) { }
 
   readonly baseURL = 'https://localhost:5001/api/Cursoes'
+  readonly baseURLCategoria = 'https://localhost:5001/api/Categorias'
   formData: CadastroCurso= new CadastroCurso();
   list!: CadastroCurso[];
+  listaCategoria!: any[];
 
 
 
@@ -39,6 +41,16 @@ export class CadastroCursoService {
 
   getCasCurso(id: number){
     return this.http.get(`${this.baseURL}/${id}`)
+  }
+
+  getCategoria(){
+    return this.http.get(`${this.baseURLCategoria}`).subscribe(
+      resposta => {
+        this.listaCategoria = resposta as any
+        console.log(this.listaCategoria)
+      },
+      err => { console.log(err); }
+    );
   }
 
 
