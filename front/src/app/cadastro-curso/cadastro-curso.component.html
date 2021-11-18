@@ -1,0 +1,54 @@
+ <h1 class="text-center">Cadastrar Curso</h1>
+ <form  class="form-control container" novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="cursoID" [value]="cadastro.formData.cursoID" />
+    <div class="row" >
+      <div class="row" >
+        <div class="col-md-6">
+          <label class="form-label">Curso</label>
+          <input  class="form-control" id="nomeCurso" name="nomeCurso" #nomeCurso="ngModel" [(ngModel)]="cadastro.formData.nomeCurso" required [class.invalid]=" nomeCurso.invalid && nomeCurso.touched">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Quatidade de alunos</label>
+          <input class="form-control" type="number" id="qtdAlunos" name="qtdAlunos" #qtdAlunos="ngModel" min="0" [(ngModel)]="cadastro.formData.qtdAlunos" required
+          [class.invalid]=" qtdAlunos.invalid && qtdAlunos.touched">
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-md-6">
+          <label class="form-label">Data de Início</label>
+          <input type="date" data-type="datepicker" class="form-control" id="dtInicio" min="{{dtHoje | date:'yyyy-MM-dd'}}" name="dtInicio" #dtInicio='ngModel' [(ngModel)]="cadastro.formData.dtInicio"
+          [class.Invalid]=" dtInicio.invalid && dtInicio.touched" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Data de Térmico</label>
+          <input type="date" data-type="datepicker" class="form-control" id="dtTermino" min="{{dtHoje | date:'yyyy-MM-dd' }}" name="dtTermino" #dtTermino='ngModel' [(ngModel)]="cadastro.formData.dtTermino"
+          [class.invalid]=" dtTermino.invalid && dtTermino.valid" required>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label">Descrição</label>
+            <input type="text" class="form-control" id="dtTermino" name="descricao" #descricao='ngModel' [(ngModel)]="cadastro.formData.descricao"
+            [class.invalid]=" descricao.invalid && descricao.valid" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Categoria</label>
+            <select  class="form-select"  name="categorias" [(ngModel)]="cadastro.formData.categoria" >
+              <option *ngFor="let cff of cadastro.listaCategoria" [ngValue]="cff.descricao">
+                {{cff.descricao}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row g-2">
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-primary" >Salvar</button>
+          </div>
+          &nbsp;
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-primary" routerLink="/cadastro-curso-view">Voltar</button>
+          </div>
+         </div>
+    </div>
+  </form>

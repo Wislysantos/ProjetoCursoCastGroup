@@ -1,0 +1,52 @@
+<div class="container form-control">
+  <div class="row">
+    <h1 class="text-center">Pesquisar</h1>
+    <div class="col-md-2">
+      <label class="form-label">Curso</label>
+      <input class="form-control" id="nomeCurso" name="nomeCurso" [(ngModel)]="nomeCurso">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1 g-3">
+      <button class="btn btn-primary" (click)="pesquisar()">Pesquisar</button> &nbsp;
+    </div>
+    <div class="col-md-1 g-3">
+      <button class="btn btn-primary" routerLink="/cadastro-curso">Cadastrar</button>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-md-8">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>Nome Curso</th>
+            <th>Qtd Alunos</th>
+            <th>Data Inicio</th>
+            <th>Data Termino</th>
+            <th>Descrição</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let c of cadastro.list">
+            <td >{{c.nomeCurso}}</td>
+            <td >{{c.qtdAlunos}}</td>
+            <td >{{c.dtInicio.split("T", 1)}}</td>
+            <td >{{c.dtTermino.split("T", 1)}}</td>
+            <td >{{c.descricao}}</td>
+            <td>
+              <button class="btn btn-danger" (click)="deletar(c.cursoID, c.dtInicio)">Apagar</button>
+            </td>
+            <td>
+              <button class="btn btn-warning" routerLink="/cadastro-curso" (click)="alterar(c)">Editar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
