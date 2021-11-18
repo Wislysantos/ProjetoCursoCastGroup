@@ -10,8 +10,8 @@ using back.Models;
 namespace back.Migrations
 {
     [DbContext(typeof(CursoContext))]
-    [Migration("20211117034423_InicioDB")]
-    partial class InicioDB
+    [Migration("20211118190153_inicioDB")]
+    partial class inicioDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,6 +44,10 @@ namespace back.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
@@ -64,6 +68,32 @@ namespace back.Migrations
                     b.HasKey("CursoID");
 
                     b.ToTable("Cursos");
+                });
+
+            modelBuilder.Entity("back.Models.Log", b =>
+                {
+                    b.Property<int>("LogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataAtualicao")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("DataInclucao")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Operacao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("nomeCurso")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("LogID");
+
+                    b.ToTable("Log");
                 });
 #pragma warning restore 612, 618
         }

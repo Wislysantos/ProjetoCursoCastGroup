@@ -21,6 +21,8 @@ export class CadastroCursoViewComponent implements OnInit {
 
   pesquisar() {
     console.log(this.nomeCurso)
+    
+
     if (this.nomeCurso === '')
       return this.cadastro.refreshList()
     this.cadastro.getPesquisar(this.nomeCurso).subscribe(

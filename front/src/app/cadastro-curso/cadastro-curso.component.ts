@@ -40,7 +40,7 @@ export class CadastroCursoComponent implements OnInit {
      if(this.cadastro.formData.cursoID == 0){
        this.insertRecord(form);
         return alert("Curso adicionado com sucesso!")
-        
+
      }
 
       else
@@ -56,7 +56,6 @@ export class CadastroCursoComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.cadastro.postCasCurso().subscribe(
       res => {
-        this.resetForm(form);
         this.cadastro.refreshList();
         this.toastr.success('Enviado com sucesso', 'Registro de detalhes de pagamento')
       },
@@ -67,7 +66,6 @@ export class CadastroCursoComponent implements OnInit {
   updateRecord(form: NgForm) {
     this.cadastro.putCasCurso().subscribe(
       res => {
-        this.resetForm(form);
         this.cadastro.refreshList();
         this.toastr.info('Atualizado com sucesso', 'Registro de detalhes de pagamento')
       },

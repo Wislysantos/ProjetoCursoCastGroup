@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using back.Models;
@@ -55,6 +54,12 @@ namespace back.Controllers
 
             try
             {
+                Log log = new Log {                   
+                    DataAtualicao = DateTime.Now,
+                    Operacao = "Editado",
+                    nomeCurso = curso.NomeCurso,
+                };
+                _context.Log.Add(log);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -78,9 +83,19 @@ namespace back.Controllers
         public async Task<ActionResult<Curso>> PostCurso(Curso curso)
         {
             _context.Cursos.Add(curso);
-            await _context.SaveChangesAsync();
 
+            Log log = new Log {
+                DataInclucao = DateTime.Now,
+                DataAtualicao = DateTime.Now,
+                Operacao = "Cadastrado",
+                nomeCurso = curso.NomeCurso,                
+            };
+            _context.Log.Add(log);
+            
+            await _context.SaveChangesAsync();
             return CreatedAtAction("GetCurso", new { id = curso.CursoID }, curso);
+
+
         }
 
         // DELETE: api/Cursoes/5
@@ -94,6 +109,14 @@ namespace back.Controllers
             }
 
             _context.Cursos.Remove(curso);
+
+            Log log = new Log {
+                DataInclucao = DateTime.Now,
+                DataAtualicao = DateTime.Now,
+                Operacao = "Deletado",
+                nomeCurso = curso.NomeCurso
+            };
+            _context.Log.Add(log);
             await _context.SaveChangesAsync();
 
             return NoContent();

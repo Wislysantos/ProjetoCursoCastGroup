@@ -14,5 +14,7 @@ namespace back.Models {
 
         public DbSet<back.Models.Categoria> Categoria { get; set; }
 
+        public DbSet<Log> Log { get; set; }
+
     }
 }
