@@ -3,7 +3,7 @@ import { CadastroCursoService } from './../shared/cadastro-curso.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CadastroCurso } from '../shared/cadastro-curso';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 
@@ -16,19 +16,18 @@ export class CadastroCursoComponent implements OnInit {
 
   dtHoje = new Date();
   listaCategoria = new Array()
+  d = true
 
 
-  constructor(public cadastro: CadastroCursoService, private toastr: ToastrService) { }
+  constructor(public cadastro: CadastroCursoService, private toastr: ToastrService, private router: Router) {
+
+   }
 
   ngOnInit(): void {
-    this.buscarCategorias()
+    this.cadastro.getCategoria()
   }
 
   onSubmit(form: NgForm) {
-
-    console.log("valor formdata " );
-    console.log(this.cadastro.formData);
-    console.log(this.cadastro.formData.dtInicio > this.cadastro.formData.dtTermino);
 
     if(this.cadastro.formData.dtInicio > this.cadastro.formData.dtTermino){
       return alert("Data de inicio não pode ser maior do que Termino")
@@ -49,6 +48,8 @@ export class CadastroCursoComponent implements OnInit {
     this.cadastro.formData.dtInicio
     if (this.cadastro.formData.cursoID == 0)
       this.insertRecord(form);
+
+
     else
       this.updateRecord(form);
   }
@@ -56,6 +57,7 @@ export class CadastroCursoComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.cadastro.postCasCurso().subscribe(
       res => {
+        this.resetForm(form);
         this.cadastro.refreshList();
         this.toastr.success('Enviado com sucesso', 'Registro de detalhes de pagamento')
       },
@@ -66,6 +68,7 @@ export class CadastroCursoComponent implements OnInit {
   updateRecord(form: NgForm) {
     this.cadastro.putCasCurso().subscribe(
       res => {
+        this.resetForm(form);
         this.cadastro.refreshList();
         this.toastr.info('Atualizado com sucesso', 'Registro de detalhes de pagamento')
       },
@@ -78,13 +81,9 @@ export class CadastroCursoComponent implements OnInit {
     this.cadastro.formData = new CadastroCurso();
   }
 
-  ver(n: any){
-    console.log(n);
-  }
-
-  buscarCategorias() {
-    this.cadastro.getCategoria()
-    console.log(this.cadastro.listaCategoria);
+  voltar(){
+    this.cadastro.formData = new CadastroCurso()
+    this.router.navigate(['/']);
   }
 
 }

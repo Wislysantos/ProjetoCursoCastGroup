@@ -3,6 +3,7 @@ import { CadastroCursoComponent } from './cadastro-curso/cadastro-curso.componen
 
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 
 const routes: Routes = [
   {path: '', component: CadastroCursoViewComponent},

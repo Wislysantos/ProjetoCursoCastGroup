@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CadastroCurso } from 'src/app/shared/cadastro-curso';
@@ -13,7 +14,7 @@ export class CadastroCursoViewComponent implements OnInit {
 
   nomeCurso: string = ''
   dtHoje = new Date()
-  constructor(public cadastro: CadastroCursoService, private toastr: ToastrService) { }
+  constructor(public cadastro: CadastroCursoService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.cadastro.refreshList()
@@ -21,7 +22,7 @@ export class CadastroCursoViewComponent implements OnInit {
 
   pesquisar() {
     console.log(this.nomeCurso)
-    
+
 
     if (this.nomeCurso === '')
       return this.cadastro.refreshList()
@@ -35,7 +36,9 @@ export class CadastroCursoViewComponent implements OnInit {
   }
 
   alterar(selectedRecord: CadastroCurso) {
+    
     this.cadastro.formData = Object.assign({}, selectedRecord);
+
   }
 
   ver1(id: number){

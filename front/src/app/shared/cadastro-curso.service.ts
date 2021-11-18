@@ -17,6 +17,7 @@ export class CadastroCursoService {
   list!: CadastroCurso[];
   listaCategoria!: any[];
 
+
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -32,6 +33,10 @@ export class CadastroCursoService {
 
   deleteCasCurso(id :number){
     return this.http.delete(`${this.baseURL}/${id}`);
+  }
+
+  atualizar(){
+    this.formData.nomeCurso= ''
   }
 
   refreshList(){
