@@ -23,7 +23,6 @@ export class CadastroCursoViewComponent implements OnInit {
   pesquisar() {
     console.log(this.nomeCurso)
 
-
     if (this.nomeCurso === '')
       return this.cadastro.refreshList()
     this.cadastro.getPesquisar(this.nomeCurso).subscribe(
@@ -36,7 +35,6 @@ export class CadastroCursoViewComponent implements OnInit {
   }
 
   alterar(selectedRecord: CadastroCurso) {
-    
     this.cadastro.formData = Object.assign({}, selectedRecord);
 
   }
@@ -52,8 +50,6 @@ export class CadastroCursoViewComponent implements OnInit {
     console.log(dtInicio < this.dtHoje);
     console.log(dtInicio.getTime());
     console.log(this.dtHoje.getTime());
-
-    if(dataInicio )
 
     if(dtInicio < this.dtHoje){
       return alert("Este Curso não pode ser apagado")

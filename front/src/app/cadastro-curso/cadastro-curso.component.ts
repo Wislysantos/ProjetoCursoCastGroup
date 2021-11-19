@@ -32,14 +32,19 @@ export class CadastroCursoComponent implements OnInit {
     if(this.cadastro.formData.dtInicio > this.cadastro.formData.dtTermino){
       return alert("Data de inicio não pode ser maior do que Termino")
     }
-    if(this.cadastro.formData.nomeCurso == "" || this.cadastro.formData.qtdAlunos == null || this.cadastro.formData.qtdAlunos == 0 || this.cadastro.formData.descricao == "" || this.cadastro.formData.dtInicio == "" || this.cadastro.formData.dtTermino == ""){
+    if(this.cadastro.formData.nomeCurso == "" || this.cadastro.formData.qtdAlunos == null || this.cadastro.formData.descricao == "" || this.cadastro.formData.dtInicio == "" || this.cadastro.formData.dtTermino == ""){
       return alert("Por favor Preencha todos os campos")
+     }
+     if(this.cadastro.formData.qtdAlunos < 0){
+       return alert("Quantidade de alunos não pode ser negativa")
+     }
+     if(this.cadastro.formData.qtdAlunos == 0){
+       return alert("Quantidade de alunos não pode ser 0")
      }
 
      if(this.cadastro.formData.cursoID == 0){
        this.insertRecord(form);
         return alert("Curso adicionado com sucesso!")
-
      }
 
       else
@@ -59,7 +64,7 @@ export class CadastroCursoComponent implements OnInit {
       res => {
         this.resetForm(form);
         this.cadastro.refreshList();
-        this.toastr.success('Enviado com sucesso', 'Registro de detalhes de pagamento')
+        this.toastr.success()
       },
       err => { console.log(err); }
     );
@@ -70,7 +75,7 @@ export class CadastroCursoComponent implements OnInit {
       res => {
         this.resetForm(form);
         this.cadastro.refreshList();
-        this.toastr.info('Atualizado com sucesso', 'Registro de detalhes de pagamento')
+        this.toastr.info()
       },
       err => { console.log(err); }
     );
